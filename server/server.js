@@ -3,9 +3,7 @@ const router = require('./users/router')
 const dbConnect = require('./db')
 const app = express()
 
-dbConnect(
-  'mongodb+srv://testingDB:abcde12345@cluster0.ipm0m.mongodb.net/send-form-tutorial?retryWrites=true&w=majority'
-)
+dbConnect('your_DB_URI')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
