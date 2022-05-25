@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send form tutorial</title>
+  </head>
+  <body>
+    <form id="form">
+      <label>
+        <p>Nombre:</p>
+        <input type="text" name="name" />
+      </label>
+      <label>
+        <p>Edad:</p>
+        <input type="number" name="age" />
+      </label>
+      <label>
+        <p>Email:</p>
+        <input type="email" name="email" />
+      </label>
+      <button style="background-color: green; color: white">Enviar</button>
+    </form>
+    <script>
+      const $form = document.getElementById('form')
+
+      $form.addEventListener('submit', async (event) => {
+        event.preventDefault()
+        const fd = new FormData($form)
+        await fetch('http://localhost:3001/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: fd.get('name'),
+            age: fd.get('age'),
+            email: fd.get('email')
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

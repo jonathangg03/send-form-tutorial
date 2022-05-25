@@ -15,15 +15,20 @@ router.get('/:name', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const newUser = new Model({
-    name: req.body.name,
-    age: req.body.age,
-    email: req.body.email
-  })
+  try {
+    const newUser = new Model({
+      name: req.body.name,
+      age: req.body.age,
+      email: req.body.email
+    })
 
-  await newUser.save()
+    console.log(req.body)
 
-  res.json(newUser)
+    await newUser.save()
+    res.json(newUser)
+  } catch (error) {
+    console.log(error.message)
+  }
 })
 
 module.exports = router
